@@ -1,0 +1,13 @@
+body {
+    font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+    background: #111827;
+    color: #f9fafb;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 4rem auto;
+    max-width: 800px;
+    width: 100%;
+}
