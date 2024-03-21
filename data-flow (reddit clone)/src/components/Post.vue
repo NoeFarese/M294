@@ -1,19 +1,12 @@
 <script setup>
-import { computed } from "vue";
 
-const props = defineProps({
+defineProps({
     id: Number,
     title: String,
     text: String,
     user: String,
     votes: Number
   })
-
-const id = computed(() => props.id)
-const title = computed(() => props.title)
-const text = computed(() => props.text)
-const user = computed(() => props.user)
-const votes = computed(() => props.votes)
 
 defineEmits(['voteUp', 'voteDown'])
 </script>
