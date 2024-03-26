@@ -20,18 +20,7 @@ import Tweet from "@/components/Tweet.vue";
         <Navigation/>
       </aside>
       <main class="content">
-
-        <!-- Login Info -->
-        <LoginInfo/>
-
-        <!-- Composer -->
-        <Composer/>
-
-        <!-- Stream -->
-        <section class="stream">
-          <!-- Tweet -->
-          <Tweet v-for="tweet in [1, 2, 3, 4, 5, 6, 7, 8, 9 ]" />
-        </section>
+        <RouterView/>
       </main>
 
       <aside class="sidebar sidebar--right">
