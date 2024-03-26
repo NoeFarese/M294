@@ -15,9 +15,7 @@ onMounted(async () => {
   console.log('checkAuth Resultat', response)
 })
 
-onMounted( () => {
-   reloadStream()
-})
+onMounted( () => reloadStream())
 
 async function reloadStream(){
   loading.value = true
