@@ -1,5 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue';
+import { createTweet } from '@/api/requests'
+
 const tweetText = ref('')
 
 function updateTextLength(){
@@ -8,13 +10,17 @@ function updateTextLength(){
   if (counter) counter.textContent = length;
 }
 
+function submit() {
+  createTweet(tweetText.value)
+}
+
 watch(tweetText, () => {
   updateTextLength()
 })
 </script>
 
 <template>
-  <form class="composer">
+  <form class="composer" @submit.prevent="submit()">
     <label class="composer__prompt">Was geht?</label>
     <textarea maxlength="160" class="composer__textarea" placeholder="Verfasse einen Tweet..." v-model="tweetText"/>
     <div class="composer__actions">
