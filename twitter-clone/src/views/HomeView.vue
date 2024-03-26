@@ -2,6 +2,17 @@
 import Composer from "@/components/Composer.vue";
 import Tweet from "@/components/Tweet.vue";
 import LoginInfo from "@/components/LoginInfo.vue";
+import { onMounted, ref } from 'vue'
+
+const loading = ref(true)
+
+onMounted(async () => {
+  console.log('HomeView mounted')
+  setTimeout(() => {
+    loading.value = false
+  }, 3000)
+})
+
 </script>
 
 <template>
@@ -14,7 +25,7 @@ import LoginInfo from "@/components/LoginInfo.vue";
     <Composer/>
 
     <!-- Stream -->
-    <section class="stream">
+    <section class="stream" v-if="loading === false">
       <!-- Tweet -->
       <Tweet
           v-for="tweet in [1, 2, 3, 4, 5, 6, 7, 8, 9]"
@@ -23,5 +34,9 @@ import LoginInfo from "@/components/LoginInfo.vue";
           :created-at="'2023-01-01T12:00:00Z'"
        />
     </section>
+
+    <div class="loading" v-if="loading === true">
+      Lade Tweets...
+    </div>
   </main>
 </template>
