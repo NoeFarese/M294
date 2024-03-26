@@ -15,7 +15,7 @@ const props = defineProps({
     <div class="tweet__content">
       <div class="tweet__header">
         <span class="tweet__author">{{ props.user.name }}</span>
-        <span class="tweet__timestamp"> vor 1 Minute</span>
+        <span class="tweet__timestamp">{{ created_at }}</span>
       </div>
       <div class="tweet__text">
         {{ text }}
