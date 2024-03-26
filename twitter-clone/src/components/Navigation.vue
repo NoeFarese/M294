@@ -1,6 +1,9 @@
 <script setup>
 import IconLogin from "@/components/icons/IconLogin.vue";
 import IconHome from "@/components/icons/IconHome.vue";
+import { useAuth } from "@/api/auth";
+
+const { isLoggedIn, logout } = useAuth()
 </script>
 
 <template>
@@ -9,10 +12,14 @@ import IconHome from "@/components/icons/IconHome.vue";
       <IconHome/>
       Stream
     </RouterLink>
-    <RouterLink to="/login">
+    <RouterLink to="/login" v-if="isLoggedIn === false">
       <IconLogin/>
       Login
     </RouterLink>
+    <a href="#" class="logout-link" v-if="isLoggedIn === true" @click="logout">
+      <IconLogin/>
+      Logout
+    </a>
   </nav>
 </template>
 
