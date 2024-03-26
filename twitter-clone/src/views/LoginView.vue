@@ -1,7 +1,13 @@
 <script setup>
 import { ref } from 'vue';
+
 const email = ref('')
 const password = ref('')
+
+const errors = ref({
+  email: '',
+  password: '',
+})
 
 async function login () {
   console.log('login', email.value, password.value)
@@ -15,15 +21,15 @@ async function login () {
         <div class="form-group">
           <label class="form-label" for="email">E-Mail</label>
           <input class="form-input" type="email" id="email" v-model="email"/>
-          <div class="form-error">
-            Ungültige E-Mail
+          <div class="form-error" v-if="errors.email !== ''">
+            {{ errors.email }}
           </div>
         </div>
         <div class="form-group">
           <label class="form-label" for="password">Passwort</label>
           <input class="form-input" type="password" id="password" v-model="password"/>
-          <div class="form-error">
-            Falsches Passwort
+          <div class="form-error" v-if="errors.password !== ''">
+            {{ errors.password }}
           </div>
         </div>
         <div class="form-group">
@@ -35,4 +41,3 @@ async function login () {
     </section>
   </div>
 </template>
-
