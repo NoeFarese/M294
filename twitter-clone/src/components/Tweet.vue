@@ -1,5 +1,7 @@
 <script setup>
 
+import {formatDistanceToNow} from "date-fns";
+
 const props = defineProps({
   user: Object,
   text: String,
@@ -15,7 +17,7 @@ const props = defineProps({
     <div class="tweet__content">
       <div class="tweet__header">
         <span class="tweet__author">{{ props.user.name }}</span>
-        <span class="tweet__timestamp">{{ created_at }}</span>
+        <span class="tweet__timestamp">{{formatDistanceToNow(new Date(created_at), { addSuffix: true }) }}</span>
       </div>
       <div class="tweet__text">
         {{ text }}
