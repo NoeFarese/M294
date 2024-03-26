@@ -2,12 +2,16 @@
 import { ref } from 'vue';
 const email = ref('')
 const password = ref('')
+
+async function login () {
+  console.log('login', email.value, password.value)
+}
 </script>
 
 <template>
   <div class="login">
     <section class="login-wrapper">
-      <form action="#" class="login-form" autocomplete="off" novalidate>
+      <form action="#" class="login-form" autocomplete="off" novalidate @submit.prevent="login">
         <div class="form-group">
           <label class="form-label" for="email">E-Mail</label>
           <input class="form-input" type="email" id="email" v-model="email"/>
