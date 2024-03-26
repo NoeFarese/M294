@@ -38,7 +38,7 @@ async function reloadStream(){
     <Composer v-if="isLoggedIn" @posted="reloadStream"/>
 
     <!-- Stream -->
-    <section class="stream" v-if="loading === false">
+    <section class="stream" v-if="!loading">
       <!-- Tweet -->
       <Tweet v-for="tweet in tweets" :key="tweet.id"
           :user="tweet.user"
@@ -47,7 +47,7 @@ async function reloadStream(){
        />
     </section>
 
-    <div class="loading" v-if="loading === true">
+    <div class="loading" v-if="loading">
       Lade Tweets...
     </div>
   </main>
