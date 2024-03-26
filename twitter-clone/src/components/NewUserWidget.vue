@@ -11,7 +11,6 @@ onMounted(async () => {
   loading.value = true
   try {
     newUsers.value = await fetchNewUsers()
-    console.log('new users',fetchNewUsers())
   } catch (error) {
     console.error(error)
   } finally {

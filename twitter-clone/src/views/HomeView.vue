@@ -12,7 +12,6 @@ const tweets = ref([])
 
 onMounted(async () => {
   const response = await checkAuth()
-  console.log('checkAuth Resultat', response)
 })
 
 onMounted( () => reloadStream())
