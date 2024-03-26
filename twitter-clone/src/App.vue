@@ -11,7 +11,9 @@ import NewUserWidget from "@/components/NewUserWidget.vue";
     <div class="grid">
       <aside class="sidebar sidebar--left">
         <!-- Logo -->
-        <Logo/>
+        <RouterLink to="/">
+          <Logo/>
+        </RouterLink>
 
         <!-- Navigation -->
         <Navigation/>
