@@ -3,6 +3,8 @@ import { ref, watch } from 'vue';
 import { createTweet } from '@/api/requests'
 
 const tweetText = ref('')
+const emit = defineEmits(['posted'])
+
 
 function updateTextLength(){
   const length = tweetText.value.length;
@@ -12,6 +14,8 @@ function updateTextLength(){
 
 function submit() {
   createTweet(tweetText.value)
+  emit('posted')
+  tweetText.value = ''
 }
 
 watch(tweetText, () => {

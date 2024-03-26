@@ -16,6 +16,10 @@ onMounted(async () => {
 })
 
 onMounted(async () => {
+  await reloadStream()
+})
+
+async function reloadStream(){
   loading.value = true
   try {
     const stream = await fetchStream()
@@ -25,7 +29,7 @@ onMounted(async () => {
   } finally {
     loading.value = false
   }
-})
+}
 </script>
 
 <template>
@@ -34,7 +38,7 @@ onMounted(async () => {
     <LoginInfo v-if="isLoggedIn === false"/>
 
     <!-- Composer -->
-    <Composer v-if="isLoggedIn === true"/>
+    <Composer v-if="isLoggedIn === true" @posted="reloadStream"/>
 
     <!-- Stream -->
     <section class="stream" v-if="loading === false">
