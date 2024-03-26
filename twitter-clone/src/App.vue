@@ -36,12 +36,8 @@ import Widget from "@/components/Widget.vue";
           <ul class="content-list">
             <li class="content-list__item" v-for="user in [1, 2, 3, 4, 5]">
               <a href="#">
-                <span class="content-list__meta">
-                  30.12.2022 15:00
-                </span>
-                <span class="content-list__text">
-                  Max Mustermann
-                </span>
+                <span class="content-list__meta">30.12.2022 15:00</span>
+                <span class="content-list__text">Max Mustermann</span>
               </a>
             </li>
           </ul>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { loginUser } from '@/api/requests'
 import { useRouter } from 'vue-router'
 
@@ -11,6 +11,10 @@ const errors = ref({
 })
 
 const router = useRouter()
+
+const loginDisabled = computed(() => {
+  return !email.value || !password.value
+})
 
 async function login () {
   try {
@@ -34,19 +38,19 @@ async function login () {
         <div class="form-group">
           <label class="form-label" for="email">E-Mail</label>
           <input class="form-input" type="email" id="email" v-model="email"/>
-          <div class="form-error" v-if="errors.email !== ''">
+          <div class="form-error" v-if="errors.email">
             {{ errors.email }}
           </div>
         </div>
         <div class="form-group">
           <label class="form-label" for="password">Passwort</label>
           <input class="form-input" type="password" id="password" v-model="password"/>
-          <div class="form-error" v-if="errors.password !== ''">
+          <div class="form-error" v-if="errors.password">
             {{ errors.password }}
           </div>
         </div>
         <div class="form-group">
-          <button :disabled="password === '' || email === ''" class="btn btn--primary btn--block">
+          <button :disabled="loginDisabled" class="btn btn--primary btn--block">
             Login
           </button>
         </div>

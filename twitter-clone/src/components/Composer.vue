@@ -1,16 +1,9 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import { createTweet } from '@/api/requests'
 
 const tweetText = ref('')
 const emit = defineEmits(['posted'])
-
-
-function updateTextLength(){
-  const length = tweetText.value.length;
-  const counter = document.querySelector('.stats__counter');
-  if (counter) counter.textContent = length;
-}
 
 function submit() {
   createTweet(tweetText.value)
@@ -18,9 +11,6 @@ function submit() {
   tweetText.value = ''
 }
 
-watch(tweetText, () => {
-  updateTextLength()
-})
 </script>
 
 <template>
@@ -29,7 +19,7 @@ watch(tweetText, () => {
     <textarea maxlength="160" class="composer__textarea" placeholder="Verfasse einen Tweet..." v-model="tweetText"/>
     <div class="composer__actions">
       <div class="composer__stats stats">
-        <span class="stats__counter">0</span>
+        <span class="stats__counter">{{ tweetText.length }}</span>
         <span class="stats__max">/ 160</span>
       </div>
       <button :disabled="tweetText.length < 5" class="btn btn--primary">

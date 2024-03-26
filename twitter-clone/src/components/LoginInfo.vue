@@ -1,5 +1,4 @@
 <script setup>
-
 import IconSparkles from "@/components/icons/IconSparkles.vue";
 </script>
 
