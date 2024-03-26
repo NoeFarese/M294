@@ -3,10 +3,17 @@ import Composer from "@/components/Composer.vue";
 import Tweet from "@/components/Tweet.vue";
 import LoginInfo from "@/components/LoginInfo.vue";
 import { onMounted, ref } from 'vue'
-import { fetchStream } from '@/api/requests'
+import {checkAuth, fetchStream} from '@/api/requests'
+import { useAuth } from '@/api/auth'
 
+const { isLoggedIn } = useAuth()
 const loading = ref(true)
 const tweets = ref([])
+
+onMounted(async () => {
+  const response = await checkAuth()
+  console.log('checkAuth Resultat', response)
+})
 
 onMounted(async () => {
   loading.value = true
@@ -24,10 +31,10 @@ onMounted(async () => {
 <template>
   <main class="content">
     <!-- Login Info -->
-    <LoginInfo/>
+    <LoginInfo v-if="isLoggedIn === false"/>
 
     <!-- Composer -->
-    <Composer/>
+    <Composer v-if="isLoggedIn === true"/>
 
     <!-- Stream -->
     <section class="stream" v-if="loading === false">
