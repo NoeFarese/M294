@@ -50,25 +50,41 @@ function setRetweetText(text){
 <template>
   <main class="content">
     <LoginInfo v-if="!isLoggedIn"/>
-
     <Composer v-if="isLoggedIn" @posted="reloadStream" :text="retweetText" @updateText="setRetweetText"/>
 
-    <section class="stream" v-if="!loading">
-      <!-- Tweet -->
-      <Tweet v-for="tweet in tweets" :key="tweet.id"
-          :user="tweet.user"
-          :text="tweet.text"
-          :created_at="tweet.created_at"
-          :likes="tweet.likes"
-          :id="tweet.id"
-          :liked="isTweetLiked(tweet)"
-          @reloadPost="reloadStream"
-          @retweet="retweet"
-       />
-    </section>
+    <Transition name="slide-fade">
+      <section class="stream" v-if="!loading">
+        <Tweet v-for="tweet in tweets" :key="tweet.id"
+               :user="tweet.user"
+               :text="tweet.text"
+               :created_at="tweet.created_at"
+               :likes="tweet.likes"
+               :id="tweet.id"
+               :liked="isTweetLiked(tweet)"
+               @reloadPost="reloadStream"
+               @retweet="retweet"
+        />
+      </section>
+    </Transition>
 
     <div class="loading" v-if="loading">
       Lade Tweets...
     </div>
   </main>
 </template>
+
+<style scoped>
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(200px);
+  opacity: 0;
+}
+</style>
