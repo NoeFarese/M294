@@ -49,7 +49,7 @@ async function like() {
       <IconHeart @click="like" :disabled="props.liked"/>
       {{ props.likes }}
     </div>
-    <button class="retweetButton" @click="$emit('retweet', {user: user.name, text: text, date: created_at})">Retweet</button>
+    <button class="btn btn--primary" @click="$emit('retweet', {user: user.name, text: text, date: created_at})">Retweet</button>
   </div>
 </template>
 
@@ -58,14 +58,5 @@ async function like() {
     justify-content: center;
     height: 30px;
     width: 30px;
-  }
-
-  .retweetButton {
-    height: 50px;
-    width: auto;
-    border-radius: 14px;
-    border-style: none;
-    background-color: #264067;
-    color: white;
   }
 </style>
