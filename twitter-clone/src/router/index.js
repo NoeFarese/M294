@@ -7,15 +7,20 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'TwITter - Dein IT-Portal im Internet',
       component: HomeView
     },
     {
       path: '/login',
-      name: 'login',
+      name: 'TwITter - Login',
       component: LoginView
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  document.title = to.name
+  next()
 })
 
 export default router
