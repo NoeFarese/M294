@@ -15,7 +15,11 @@ import NewUserWidget from "@/components/NewUserWidget.vue";
         <Navigation/>
       </aside>
       <main class="content">
-        <RouterView/>
+        <router-view v-slot="{ Component }">
+          <transition name="fade" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </router-view>
       </main>
 
       <aside class="sidebar sidebar--right">
@@ -27,6 +31,13 @@ import NewUserWidget from "@/components/NewUserWidget.vue";
 </template>
 
 <style>
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 
 *, *::before, *::after {
   box-sizing: border-box;
