@@ -1,12 +1,34 @@
 <script setup>
-
-import {formatDistanceToNow} from "date-fns";
+import { formatDistanceToNow } from "date-fns";
+import IconHeart from "@/components/icons/IconHeart.vue";
+import {checkAuth, likeTweet} from "@/api/requests";
+import { useRouter } from "vue-router";
 
 const props = defineProps({
   user: Object,
   text: String,
-  created_at: String
+  created_at: String,
+  likes: Number,
+  id: Number,
+  liked: Boolean
 })
+
+const emit = defineEmits(['reloadPost'])
+const router = useRouter()
+
+async function like() {
+  const isLoggedIn = await checkAuth()
+  try {
+    if(isLoggedIn){
+      await likeTweet(props.id);
+      emit('reloadPost')
+    } else {
+      await router.push('/login')
+    }
+  } catch (error) {
+    console.error('not able to like tweet', error)
+  }
+}
 </script>
 
 <template>
@@ -23,9 +45,17 @@ const props = defineProps({
         {{ text }}
       </div>
     </div>
+    <div class="likeButton">
+      <IconHeart @click="like" :disabled="props.liked"/>
+      {{ props.likes }}
+    </div>
   </div>
 </template>
 
 <style scoped>
-
+  .likeButton {
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+  }
 </style>
