@@ -1,7 +1,6 @@
 <script setup>
 import Logo from "@/components/Logo.vue";
 import Navigation from "@/components/Navigation.vue";
-import Widget from "@/components/Widget.vue";
 import TopUserWidget from "@/components/TopUserWidget.vue";
 import NewUserWidget from "@/components/NewUserWidget.vue";
 </script>
@@ -10,12 +9,9 @@ import NewUserWidget from "@/components/NewUserWidget.vue";
   <div class="container">
     <div class="grid">
       <aside class="sidebar sidebar--left">
-        <!-- Logo -->
         <RouterLink to="/">
           <Logo/>
         </RouterLink>
-
-        <!-- Navigation -->
         <Navigation/>
       </aside>
       <main class="content">
@@ -23,10 +19,7 @@ import NewUserWidget from "@/components/NewUserWidget.vue";
       </main>
 
       <aside class="sidebar sidebar--right">
-        <!-- Top User Widget -->
         <TopUserWidget/>
-
-        <!-- Neue User Widget -->
         <NewUserWidget/>
       </aside>
     </div>
