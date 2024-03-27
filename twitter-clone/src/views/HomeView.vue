@@ -10,6 +10,7 @@ const { isLoggedIn } = useAuth()
 const loading = ref(true)
 const tweets = ref([])
 let response = null
+let retweetText = ref('');
 
 onMounted(async () => {
   response = await checkAuth()
@@ -32,13 +33,25 @@ function isTweetLiked(tweet) {
   if (!response || !response.data.liked_tweets) return false
   return response.data.liked_tweets.includes(tweet.id)
 }
+
+function retweet(tweet){
+  retweetText.value = `Geposted von ${tweet.user} am ${tweet.date} \n\n ${tweet.text}`
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+function setRetweetText(text){
+  retweetText.value = text
+}
 </script>
 
 <template>
   <main class="content">
     <LoginInfo v-if="!isLoggedIn"/>
 
-    <Composer v-if="isLoggedIn" @posted="reloadStream"/>
+    <Composer v-if="isLoggedIn" @posted="reloadStream" :text="retweetText" @updateText="setRetweetText"/>
 
     <section class="stream" v-if="!loading">
       <!-- Tweet -->
@@ -50,6 +63,7 @@ function isTweetLiked(tweet) {
           :id="tweet.id"
           :liked="isTweetLiked(tweet)"
           @reloadPost="reloadStream"
+          @retweet="retweet"
        />
     </section>
 
